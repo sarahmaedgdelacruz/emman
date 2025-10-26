@@ -2,7 +2,7 @@ const http = require('http');
 const fs = require('fs');
 const path = require('path');
 
-const PORT = 7890;
+const PORT = process.env.PORT || 7890;
 
 // Utility: handle internal errors
 function sendInternalError(res) {
@@ -92,11 +92,7 @@ const server = http.createServer((req, res) => {
   serveFile(res, path.join(__dirname, 'views', '404.html'), 'text/html', 404);
 });
 
-// Start the server
-// server.listen(PORT, () => {
-//   console.log(`✅ Server is running on http://localhost:${PORT}`);
-// });
-const port = process.env.PORT || 7890;
-app.listen(port, '0.0.0.0', () => {
-  console.log(`Server running on port ${port}`);
+// ✅ This works on Render (and localhost)
+server.listen(PORT, '0.0.0.0', () => {
+  console.log(`✅ Server is running on port ${PORT}`);
 });
